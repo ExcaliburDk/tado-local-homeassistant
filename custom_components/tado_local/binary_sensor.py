@@ -163,6 +163,7 @@ class TadoDeviceBattery(CoordinatorEntity, BinarySensorEntity):
         self._attr_unique_id = f"tado_local_batt_{self._device_id}"
         via_device = None
         zone_id = device_data.get("zone_id")
+        zone_name = device_data.get("zone_name")
         if zone_id:
             via_device = (DOMAIN, "zone", zone_id)
         raw_model = device_data.get("device_type", "Device")
@@ -170,13 +171,15 @@ class TadoDeviceBattery(CoordinatorEntity, BinarySensorEntity):
         if model:
             raw_model += " " + model
         sw_version = device_data.get("firmware_version", None)
+        dev_name = f"Tado {zone_name} ({self._serial})" if zone_name else f"Tado {self._serial}"
         self._device_info_data = {
             "configuration_url": f"https://app.tado.com/en/main/settings/home/rooms-and-devices/device/{self._serial}",
             "identifiers": {(DOMAIN, "device", self._device_id)},
-            "name": f"Tado {self._serial}",
+            "name": dev_name,
             "manufacturer": MANUFACTURER,
             "model": format_model(raw_model),
             "via_device": via_device,
+            "suggested_area": zone_name,
             "sw_version": sw_version,
             "serial_number": self._serial,
         }

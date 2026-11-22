@@ -95,6 +95,11 @@
       "window_rest_timeout": {
         "name": "Window Rest Timeout"
       }
+    },
+    "button": {
+      "refresh_cloud": {
+        "name": "Sync Cloud and Batteries"
+      }
     }
   },
   "services": {

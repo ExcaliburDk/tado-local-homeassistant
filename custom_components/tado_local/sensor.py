@@ -142,15 +142,18 @@ class TadoDeviceSerial(CoordinatorEntity, SensorEntity):
         self._attr_unique_id = f"tado_local_serial_{self._device_id}"
         via_device = None
         zone_id = device_data.get("zone_id")
+        zone_name = device_data.get("zone_name")
         if zone_id:
             via_device = (DOMAIN, "zone", zone_id)
         raw_model = device_data.get("device_type", "Device")
+        dev_name = f"Tado {zone_name} ({self._serial})" if zone_name else f"Tado {self._serial}"
         self._device_info_data = {
             "identifiers": {(DOMAIN, "device", self._device_id)},
-            "name": f"Tado {self._serial}",
+            "name": dev_name,
             "manufacturer": MANUFACTURER,
             "model": format_model(raw_model),
             "via_device": via_device,
+            "suggested_area": zone_name,
             "serial_number": self._serial,
         }
 

@@ -9,7 +9,7 @@ CONF_UPDATE_INTERVAL = "update_interval"
 DEFAULT_UPDATE_INTERVAL = 30
 DEFAULT_PORT = 4407
 
-PLATFORMS = ["climate", "sensor", "binary_sensor", "text"]
+PLATFORMS = ["climate", "sensor", "binary_sensor", "text", "button"]
 
 # Uniformiamo il produttore per far apparire il logo Tado ufficiale
 MANUFACTURER = "Tado"

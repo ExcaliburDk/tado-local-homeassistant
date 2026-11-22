@@ -197,6 +197,24 @@ class TadoLocalClimate(CoordinatorEntity, ClimateEntity):
         _LOGGER.debug("Preset: %s ", self._attr_preset_mode)
         self._attr_preset_mode = preset_mode
 
+    @property
+    def extra_state_attributes(self) -> dict[str, Any]:
+        """Return extra state attributes."""
+        attrs = {}
+        devices = self.coordinator.data.get("devices", []) if self.coordinator.data else []
+        zone_devices = [
+            d for d in devices
+            if d.get("zone_id") == self._zone_id
+        ]
+        if zone_devices:
+            attrs["battery_low"] = any(
+                d.get("state", {}).get("battery_low", False) for d in zone_devices
+            )
+            attrs["devices"] = [
+                d.get("serial_number") for d in zone_devices if d.get("serial_number")
+            ]
+        return attrs
+
     async def async_set_temperature(self, **kwargs) -> None:
         temp = kwargs.get(ATTR_TEMPERATURE)
         if temp is None:
