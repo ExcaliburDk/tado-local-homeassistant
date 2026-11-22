@@ -1,0 +1,122 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Tado Local",
+        "description": "Connect to the Tado Local API.",
+        "data": {
+          "ip_address": "IP Address",
+          "port": "Port",
+          "update_interval": "Update Interval (seconds)"
+        }
+      },
+      "confirm": {
+        "title": "Tado Local Discovered",
+        "description": "A Tado Local server was found at {ip}:{port}. Do you want to set it up?"
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect.",
+      "unknown": "Unexpected error",
+      "not_tado_local": "The discovered device is not a Tado Local server"
+    },
+    "abort": {
+      "already_configured": "Device is already configured",
+      "cannot_connect": "Failed to connect to the discovered server",
+      "not_tado_local": "The discovered device is not a Tado Local server"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Configure Tado Local",
+        "data": {
+          "ip_address": "IP Address",
+          "port": "Port",
+          "update_interval": "Update Interval (seconds)"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "humidity": {
+        "name": "Humidity"
+      },
+      "serial_number": {
+        "name": "Serial Number"
+      },
+      "current_temperature": {
+        "name": "Temperature"
+      },
+      "target_temperature": {
+        "name": "Target Temperature"
+      },
+      "server_status": {
+        "name": "Server status"
+      },
+      "server_version": {
+        "name": "TadoLocal version"
+      },
+      "api_limit": {
+        "name": "API calls daily limit"
+      },
+      "api_remaining": {
+        "name": "Remaining API calls"
+      },
+      "api_used": {
+        "name": "API calls used"
+      }
+    },
+    "binary_sensor": {
+      "bridge_connected": {
+        "name": "Tado Bridge"
+      },
+      "cloud_api_enabled": {
+        "name": "Cloud API"
+      },
+      "cloud_api_authenticated": {
+        "name": "Cloud API authentication"
+      },
+      "heating_active": {
+        "name": "Heating"
+      },
+      "cooling_active": {
+        "name": "Cooling"
+      },
+      "battery_low": {
+        "name": "Battery"
+      }
+    },
+    "text": {
+      "window_open_timeout": {
+        "name": "Window Open Timeout"
+      },
+      "window_rest_timeout": {
+        "name": "Window Rest Timeout"
+      }
+    }
+  },
+  "services": {
+    "resume_all_schedules": {
+      "name": "Resume Schedule for All Zones",
+      "description": "Instruct Tado to resume the smart schedule for all zones.",
+      "fields": {
+        "persistent": {
+          "name": "Persistent (or temporary)",
+          "description": "Whether to make the change persistent (=true, send to Cloud) or temporary (=false) until the next schedule change."
+        }
+      }
+    },
+    "turn_off_all_zones": {
+      "name": "Turn Off Heating for All Zones",
+      "description": "Instruct Tado to stop the smart schedule for all zones and switch to frost protection.",
+      "fields": {
+        "persistent": {
+          "name": "Persistent (or temporary)",
+          "description": "Whether to make the change persistent (=true, send to Cloud) or temporary (=false) until the next schedule change."
+        }
+      }
+    }
+  }
+}
