@@ -4,6 +4,7 @@ from typing import Any, Dict
 from homeassistant.components.climate import ClimateEntity
 from homeassistant.components.climate.const import (
     HVACMode,
+    HVACAction,
     ClimateEntityFeature,
     PRESET_AWAY,
     PRESET_HOME,
@@ -131,6 +132,21 @@ class TadoLocalClimate(CoordinatorEntity, ClimateEntity):
         if self._attr_preset_mode == PRESET_AWAY and self._update_preset_count == 0:
             self._attr_preset_mode = PRESET_NONE
         return HVACMode.COOL if (mode == 2 and self._can_cool) else HVACMode.HEAT
+
+    @property
+    def hvac_action(self) -> HVACAction | None:
+        """Return the current running hvac operation."""
+        mode = self._zone_data.get("mode")
+        if mode == 0:
+            return HVACAction.OFF
+
+        cur_heating = self._zone_data.get("cur_heating", 0)
+        if cur_heating == 1:
+            return HVACAction.HEATING
+        elif cur_heating == 2 and self._can_cool:
+            return HVACAction.COOLING
+        else:
+            return HVACAction.IDLE
 
     async def async_set_hvac_mode(self, hvac_mode: HVACMode) -> None:
         if hvac_mode == HVACMode.AUTO:
