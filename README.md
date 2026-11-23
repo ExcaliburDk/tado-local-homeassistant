@@ -66,7 +66,7 @@ Unlike the standard Tado cloud integration, **this component does not rely on Ta
 ## 🛠️ Prerequisites
 
 You must have the **TadoLocal** server running on your local network (e.g. running as a Docker container on QNAP NAS, Synology, Unraid, or Linux):
-- GitHub Repository: [ExcaliburDk/TadoLocalForQnap_private](https://github.com/ExcaliburDk/TadoLocalForQnap_private)
+- GitHub Repository: [ExcaliburDk/tado-local-server](https://github.com/ExcaliburDk/tado-local-server)
 - Default API Port: `4407` (or `4408` if mapped).
 
 ---
